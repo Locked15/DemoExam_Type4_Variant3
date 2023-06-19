@@ -21,12 +21,31 @@
 
 	<ItemGroup>
 		<None Remove="Assets\App\logo.png" />
+		<None Remove="Assets\BulletinTemplate.docx" />
 		<None Remove="Assets\Products\!None.jpg" />
 		<None Remove="Assets\Products\img100.jpg" />
 		<None Remove="Assets\Products\img101.jpg" />
 		<None Remove="Assets\Products\img102.jpg" />
 		<None Remove="Assets\Products\img103.jpg" />
 		<None Remove="Assets\Products\img104.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <COMReference Include="Microsoft.Office.Interop.Word">
+	    <WrapperTool>tlbimp</WrapperTool>
+	    <VersionMinor>7</VersionMinor>
+	    <VersionMajor>8</VersionMajor>
+	    <Guid>00020905-0000-0000-c000-000000000046</Guid>
+	    <Lcid>0</Lcid>
+	    <Isolated>false</Isolated>
+	    <EmbedInteropTypes>true</EmbedInteropTypes>
+	  </COMReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Assets\BulletinTemplate.docx">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>

@@ -1,4 +1,6 @@
-﻿using SteeringWheelApp.Models.Entities;
+﻿using Microsoft.Win32;
+using SteeringWheelApp.Controllers.Document;
+using SteeringWheelApp.Models.Entities;
 using System.Linq;
 using System.Windows;
 
@@ -28,6 +30,21 @@ namespace SteeringWheelApp.Views.Dialogs
             detailsOrderPickupPoint.Text = _currentOrder.PickupPoint.ToString();
             detailsOrderTakeCode.Text = _currentOrder.TakeCode.ToString();
             detailsOrderStatus.Text = DemoExamDataContext.Instance.OrderStatuses.FirstOrDefault(status => status.Id == _currentOrder.StatusId)?.Name ?? "Недоступно";
+        }
+
+        private void OnGeneratePdfFileButtonClick(object sender, RoutedEventArgs e) => GenerateBulletinFile();
+
+        private void GenerateBulletinFile()
+        {
+            var bulletinSaveDialog = new SaveFileDialog
+            {
+                Title = "Сохранение талона",
+                Filter = "Файлы PDF (*.pdf)|*.pdf",
+            };
+            if (bulletinSaveDialog.ShowDialog() == true)
+                new BulletinController(bulletinSaveDialog.FileName, _currentOrder).GenerateBulletin();
+            else
+                MessageBox.Show("Сохранение талона отменено.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
 }
