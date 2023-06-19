@@ -1,0 +1,57 @@
+﻿<Window x:Class="SteeringWheelApp.Views.Dialogs.BulletinDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SteeringWheelApp.Views.Dialogs"
+        mc:Ignorable="d"
+        Title="Талон — ООО 'Руль'" 
+        Height="300" Width="350"
+        ResizeMode="CanMinimize"
+        Loaded="OnWindowLoaded">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Талон | ООО 'Руль'" FontSize="18" />
+
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Дата заказа" />
+        <TextBlock Name="detailsOrderDate" Grid.Row="1" Grid.Column="1" />
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Номер заказа" />
+        <TextBlock Name="detailsOrderId" Grid.Row="2" Grid.Column="1" />
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Состав заказа" />
+        <TextBlock Name="detailsOrderProducts" Grid.Row="3" Grid.Column="1" />
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Сумма заказа" />
+        <TextBlock Name="detailsOrderCost" Grid.Row="4" Grid.Column="1" />
+
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Сумма скидки" />
+        <TextBlock Name="detailsOrderDiscount" Grid.Row="5" Grid.Column="1" />
+
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Пункт выдачи" />
+        <TextBlock Name="detailsOrderPickupPoint" Grid.Row="6" Grid.Column="1" />
+
+        <TextBlock Grid.Row="7" Grid.Column="0" Text="Код выдачи" FontWeight="Bold" FontSize="16" />
+        <TextBlock Name="detailsOrderTakeCode" Grid.Row="7" Grid.Column="1" FontWeight="Bold" FontSize="16" />
+
+        <TextBlock Grid.Row="8" Grid.Column="0" Text="Статус" />
+        <TextBlock Name="detailsOrderStatus" Grid.Row="8" Grid.Column="1" />
+    </Grid>
+</Window>

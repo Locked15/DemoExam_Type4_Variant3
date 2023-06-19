@@ -1,0 +1,93 @@
+﻿<Window x:Class="SteeringWheelApp.Views.Windows.OrderFormationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SteeringWheelApp.Views.Windows"
+        mc:Ignorable="d"
+        Title="Зазказ — ООО 'Руль'" 
+        Height="450" Width="800"
+        MinHeight="425" MinWidth="775"
+        Loaded="OnWindowLoaded" Closing="OnWindowClosing">
+
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="300*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="30*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Формирование заказа" />
+        <Label Grid.Row="0" Grid.Column="1" Content="ООО 'Руль'" />
+
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Итоговая скидка:" />
+        <TextBlock Name="finalDiscountText" Grid.Row="1" Grid.Column="1" />
+
+        <TextBlock Grid.Row="1" Grid.Column="2" Text="Итоговая стоимость:" />
+        <TextBlock Name="finalCostText" Grid.Row="1" Grid.Column="3" />
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="Точка получения:" FontSize="16" />
+        <ComboBox Name="pickupPointSelector" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" SelectedItem="{Binding Path=PickupPoint}" 
+                  Margin="2.5" />
+
+
+        <ListView Name="productsInOrderListView" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Margin="2.5" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                  SelectionMode="Single" SelectionChanged="OnProductsInOrderListViewSelectionChanged">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Добавить в заказ" Click="OnAddToOrderMenuItemClick" />
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="1.5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <Image Grid.Row="0" Source="{Binding Path=Product.BindProperties.Image, FallbackValue={StaticResource EmptyImage}}" MaxWidth="256" />
+
+                            <TextBlock Grid.Row="1" Text="{Binding Path=Product.BindProperties.Name}" />
+                            <TextBlock Grid.Row="2" Text="{Binding Path=Product.BindProperties.Description}" />
+                            <TextBlock Grid.Row="3" Text="{Binding Path=Product.BindProperties.Manufacturer}" />
+
+                            <TextBlock Grid.Row="4" Text="{Binding Path=Product.BindProperties.Discount}" />
+                            <TextBlock Grid.Row="5" Text="{Binding Path=Product.BindProperties.Cost}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Text="Количество товара:" />
+        <TextBox Name="productCountInputBox" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" 
+                 TextChanged="OnProductCountInputBoxTextChanged" />
+
+        <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Content="Сформировать талон" Margin="2.5" Click="OnGenerateBulletinButtonClick" />
+        <Button Grid.Row="5" Grid.Column="2" Content="Удалить товар" Margin="2.5" Click="OnRemoveProductFromOrderButtonClick" />
+        <Button Grid.Row="5" Grid.Column="3" Content="Сохранить заказ" Margin="2.5" Click="OnSaveOrderButtonClick" />
+    </Grid>
+</Window>

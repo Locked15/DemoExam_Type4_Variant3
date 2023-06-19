@@ -1,0 +1,80 @@
+﻿<Window x:Class="SteeringWheelApp.Views.Windows.ProductsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SteeringWheelApp.Views.Windows"
+        mc:Ignorable="d"
+        Title="Список товаров — ООО 'Руль'" 
+        Height="450" Width="800"
+        MinHeight="425" MinWidth="775"
+        Loaded="OnWindowLoaded" Closing="Window_Closing">
+
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140*"/>
+            <ColumnDefinition Width="550*"/>
+            <ColumnDefinition Width="140*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="350*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Список товаров" />
+        <Label Grid.Row="0" Grid.Column="1" Content="ООО 'Руль'" />
+        
+        
+        <Button Name="goToOrderButton" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Content="Заказ" Margin="5" 
+                Click="OnGoToOrderButtonClick" />
+        
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="Поиск"/>
+        <TextBox Name="searchInputBox" Grid.Row="2" Grid.Column="1" Margin="2.5" Text="Поисковый запрос..." />
+        
+        <Button Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Content="Выход" Click="OnExitButtonClick" Margin="5" />
+
+
+        <ListView Name="productsListView" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" SelectionMode="Single"
+                  MouseDoubleClick="OnProductsListViewMouseDoubleClick" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Добавить к заказу" Click="OnAddToOrderMenuItemClick" />
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="1.5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <Image Grid.Row="0" Source="{Binding Path=BindProperties.Image, FallbackValue={StaticResource EmptyImage}}" MaxWidth="256" />
+
+                            <TextBlock Grid.Row="1" Text="{Binding Path=BindProperties.Name}" />
+                            <TextBlock Grid.Row="2" Text="{Binding Path=BindProperties.Description}" />
+                            <TextBlock Grid.Row="3" Text="{Binding Path=BindProperties.Manufacturer}" />
+                            
+                            <TextBlock Grid.Row="4" Text="{Binding Path=BindProperties.Discount}" />
+                            <TextBlock Grid.Row="5" Text="{Binding Path=BindProperties.Cost}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>
